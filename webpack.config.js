@@ -48,5 +48,5 @@ module.exports = {
     static: './dist',
     hot: true
   },
-  mode: 'development'
+  mode: 'production'
 };
