@@ -1,16 +1,22 @@
-import { cube } from './math.js';
+import _ from 'lodash';
+import numRef from './ref.json';
 
-if (process.env.NODE_ENV !== 'production') {
-	console.log(process.env.NODE_ENV)
-	console.log(2)
+export function numToWorld(num) {
+  return _.reduce(
+    numRef,
+    (accum, ref) => {
+      return ref.num === num ? ref.world : accum;
+    },
+    ''
+  );
 }
 
-function component() {
-  const element = document.createElement('pre');
-
-  element.innerHTML = ['Hello webpack', '5 cubed is equal to ' + cube(5)].join('\n\n');
-
-  return element;
+export function worldToNum(world) {
+  return _.reduce(
+    numRef,
+    (accum, ref) => {
+      return ref.world === world && world.toLowerCase() ? ref.num : accum;
+    },
+    -1
+  );
 }
-
-document.body.appendChild(component());
